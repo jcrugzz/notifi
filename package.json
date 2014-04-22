@@ -1,0 +1,19 @@
+{
+  "name": "notifi",
+  "version": "0.0.0",
+  "description": "generic notifications/webhook client lib. Meant for use with slack/hipchat or generic webhooks",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test/*-test.js"
+  },
+  "author": "Jarrett Cruger <jcrugzz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "back": "^0.1.5",
+    "debug": "^0.8.1",
+    "http-https": "^1.0.0"
+  },
+  "devDependencies": {
+    "tap": "^0.4.8"
+  }
+}
