@@ -13,10 +13,7 @@ util.inherits(Notifi, EE);
 
 function Notifi (options) {
   if (!(this instanceof Notifi)) { return new Notifi(options) }
-  if (!options.type) {
-    throw new Error('You must define a type for proper detection');
-  }
-  this.type = options.type;
+
   // fucking domains on event emitters
   this._domain = options.domain;
   // Handle auth for arbitrary endpoints
