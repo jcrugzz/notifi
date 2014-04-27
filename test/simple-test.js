@@ -3,8 +3,7 @@ var Notifi = require('../');
 
 var domain = process.env.SLACK_DOMAIN;
 var token = process.env.SLACK_TOKEN;
-console.log(domain);
-console.log(token);
+
 test('do we work with notify?', function (t) {
   t.plan(1);
 
