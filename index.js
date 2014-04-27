@@ -20,9 +20,13 @@ function Notifi (options) {
   // fucking domains on event emitters
   this._domain = options.domain;
   // Handle auth for arbitrary endpoints
-  this.auth = options.auth;
+  // either expect a user/pass in the object or a user:auth string
+  this.auth = options.auth && typeof options.auth !== 'string'
+    ? [(options.auth.user || options.auth.username), (options.auth.pass || options.auth.password)].join(':')
+    : options.auth;
+
   this.token = options.token;
-  this.reconnect = options.reconnect || { minDelay: 100, maxDelay: 10000, retries: 3 };
+  this.reconnect = options.reconnect || { minDelay: 200, maxDelay: 10000, retries: 3 };
 
   this.url = options.url;
 
@@ -55,6 +59,12 @@ Notifi.prototype.dispatch = function (message, callback) {
   opts.headers = {
     'content-type': 'application/json'
   };
+
+  // Handle basic auth if provided
+  if (this.auth) {
+    opts.headers['Authorization'] = 'Basic ' +
+      new Buffer(this.auth, 'utf8').toString('base64');
+  }
 
   var req = http.request(opts);
   req.on('error', this._onError.bind(this, copy));
