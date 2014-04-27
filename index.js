@@ -50,7 +50,7 @@ Notifi.prototype.dispatch = function (message, callback) {
     ? new Buffer(JSON.stringify(message), 'utf8')
     : message;
 
-  // Do i technically need to make a copy for rety?
+  // Do i technically need to make a copy for retry?
   var copy = new Buffer(payload.length);
   payload.copy(copy);
 
