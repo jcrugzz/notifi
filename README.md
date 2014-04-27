@@ -9,10 +9,12 @@ constructor.
 ## Example
 
 ```js
+//
+// Example with slack
+//
 var notify = require('notifi');
 
 var options = {
-  type: 'slack',
   token: 'p19845osdfgsd0998',
   domain: 'myCompany'
 };
