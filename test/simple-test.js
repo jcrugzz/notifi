@@ -2,15 +2,18 @@ var test = require('tap').test;
 var Notifi = require('../');
 
 var domain = process.env.SLACK_DOMAIN;
-var token = process.env.SLACK_TOKEN;
+var slackToken = process.env.SLACK_TOKEN;
 
-test('do we work with notify?', function (t) {
+var hipchatRoom = process.env.HIPCHAT_ROOM;
+var hipchatToken = process.env.HIPCHAT_TOKEN;
+
+test('do we work with slack?', function (t) {
   t.plan(1);
 
   var notify = new Notifi({
     type: 'slack',
     domain: domain,
-    token: token
+    token: slackToken
   }).dispatch({
     channel: '#test',
     username: 'npm publish',
@@ -25,6 +28,27 @@ test('do we work with notify?', function (t) {
     t.ok(true, 'we should be cool');
   });
 
+});
+
+test('do we work with hipchat?', function (t) {
+  t.plan(1);
+
+  var notify = new Notifi({
+    type: 'hipchat',
+    token: hipchatToken,
+    room: hipchatRoom,
+  }).dispatch({
+    username: 'npm-notify',
+    text: 'Hello there evan'
+  });
+
+  notify.on('error', function (err) {
+    t.fail(err.message);
+  });
+
+  notify.on('done', function () {
+    t.ok(true, 'hipchat success');
+  })
 });
 
 test('We should retry 3 times and properly fail with a bad token hitting slack', function (t) {
