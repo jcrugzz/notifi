@@ -1,7 +1,7 @@
 # notifi
 
 simple little module that sends a JSON payload to an arbitary endpoint or more
-specifically, the `slack` notification API. The main purpose of
+specifically, the `slack`/`hipchat` notification APIs. The main purpose of
 this is to be a singular dispatcher with an expected format that works
 seamlessly with all of these services. Options will be smartly intuited in the
 constructor.
