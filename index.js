@@ -16,8 +16,10 @@ util.inherits(Notifi, EE);
 function Notifi (options) {
   if (!(this instanceof Notifi)) { return new Notifi(options) }
   options = options || {};
+  
+  this.type = options.type && options.type.toLowerCase();
 
-  if (!options.url && !~TYPES.indexOf(options.type && options.type.toLowerCase())) {
+  if (!options.url && !~TYPES.indexOf(this.type)) {
     throw new Error('Must be of type hipchat/slack or you must provide a URL with optional auth');
   }
 
@@ -64,6 +66,10 @@ function Notifi (options) {
 Notifi.prototype.dispatch = function (message, callback) {
   if (callback && typeof callback === 'function') {
     this._callback = callback;
+  }
+  
+  if (this.room && this.type === 'slack') {
+    message.room = this.room || message.room;
   }
 
   var payload = !Buffer.isBuffer(message)
