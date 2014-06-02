@@ -16,7 +16,7 @@ util.inherits(Notifi, EE);
 function Notifi (options) {
   if (!(this instanceof Notifi)) { return new Notifi(options) }
   options = options || {};
-  
+
   this.type = options.type && options.type.toLowerCase();
 
   if (!options.url && !~TYPES.indexOf(this.type)) {
@@ -33,7 +33,7 @@ function Notifi (options) {
 
   // fucking domains on event emitters
   this._domain = options.domain;
-  this.room = options.room || options.room_id;
+  this.room = options.room || options.room_id || options.channel;
 
   // Handle auth for arbitrary endpoints
   // either expect a user/pass in the object or a user:auth string
@@ -67,9 +67,9 @@ Notifi.prototype.dispatch = function (message, callback) {
   if (callback && typeof callback === 'function') {
     this._callback = callback;
   }
-  
+
   if (this.room && this.type === 'slack') {
-    message.room = this.room || message.room;
+    message.channel = this.room || message.channel;
   }
 
   var payload = !Buffer.isBuffer(message)
