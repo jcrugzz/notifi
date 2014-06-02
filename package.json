@@ -1,6 +1,6 @@
 {
   "name": "notifi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "generic notifications/webhook client lib. Meant for use with slack/hipchat or generic webhooks",
   "main": "index.js",
   "scripts": {
