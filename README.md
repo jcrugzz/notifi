@@ -15,6 +15,7 @@ constructor.
 var notify = require('notifi');
 
 var options = {
+  type: 'slack'
   token: 'p19845osdfgsd0998',
   domain: 'myCompany'
 };
